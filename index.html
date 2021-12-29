@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FinalSudoku</title>
+    <link rel="stylesheet" type="text/css" href="./FinalSudoku.css">
+</head>
+<body>
+<div id="app">
+    <div class="row" v-for="(row, rowIndex) in rows">
+        <div class="col" v-for="(col, colIndex) in row"
+             v-bind:style="{borderTop: rowIndex === 0 ? '2px black solid' : '0px',
+             borderLeft: colIndex === 0 ? '2px black solid' : '0px',
+             borderRight: (colIndex + 1) % 3 === 0 ? '2px black solid' : '1px gainsboro solid',
+             borderBottom: (rowIndex + 1) % 3 === 0 ? '2px black solid' : '1px gainsboro solid',
+             color: col.val === 0 ? 'red' : 'black'}">
+            <input type="text" maxlength="1" onmouseover="this.select()" v-bind:id="'r' + rowIndex + 'c' + colIndex"
+                   v-on:keyup="inputFocus($event, rowIndex, colIndex)"
+                   v-bind:style="{color: col.input === true ? 'blue' : 'black'}"
+                   v-show="col.input === true">
+            <label v-show="col.input === false">{{ col.val }}</label>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+<script type="text/javascript" src="./FinalSudoku.js"></script>
+</html>
